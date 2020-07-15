@@ -1,0 +1,5 @@
+#to install:
+# run pip install -r requirements.txt to install all the project's dependencies automatically
+# source https://medium.com/knerd/best-practices-for-python-dependency-management-cc8d1913db82
+
+requests
