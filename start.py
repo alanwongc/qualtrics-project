@@ -1,9 +1,8 @@
-#Alan Wong
+# Alan Wong
 
-#updated 7/14/20
+# updated 7/14/20
 
-
-#Using the API solution guide found at 
+# Using the API solution guide found at 
 # https://api.qualtrics.com/guides/docs/Guides/Common%20Tasks/getting-survey-responses-via-the-new-export-apis.md
 # to download responses for a specified survey into a zip file
 
@@ -13,6 +12,13 @@ import json
 import io, os
 import sys
 import re
+import config
+
+# Set environment variables.
+os.environ['APIKEY'] = config.api_key
+os.environ['DATACENTER'] = config.datacenter
+
+
 
 def exportSurvey(apiToken,surveyId, dataCenter, fileFormat):
 
@@ -70,8 +76,14 @@ def main():
       sys.exit(2)
 
     try:
-        surveyId=sys.argv[1]
-        fileFormat=sys.argv[2]
+        # Take in survey ID and file format as command line arguments
+        #surveyId=sys.argv[1]
+        #fileFormat=sys.argv[2]
+
+        # Hard code the survey ID and file format instead for easier testing
+        surveyId = 'SV_6ES6BtNDjQ3UMJf'
+        fileFormat = 'csv'
+
     except IndexError:
         print ("usage: surveyId fileFormat")
         sys.exit(2)

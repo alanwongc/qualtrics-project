@@ -1,0 +1,11 @@
+# these are the files I have excluded from my commits
+
+# Ignore MyQualtricsDownload folder
+MyQualtricsDownload
+
+$ Ignore configuration file
+config.py
+
+# Ignore compiled files
+config.pyc
+
