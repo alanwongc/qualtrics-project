@@ -1,6 +1,6 @@
 # qualtrics-project
 
-This script will download responses from a qualtrics survey and input them into a Google Sheet. I chose python for this project as it is modern and versatile language with many useful libraries written for it.
+This script will download responses from a qualtrics survey and input them into a Google Sheet. I chose python for this project as it is a modern and versatile language with many useful libraries written for it.
 
 ### Installing
 
