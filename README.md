@@ -1,6 +1,6 @@
 # qualtrics-project
 
-This script will download responses from a specified qualtrics survey and input them into a google sheet
+This script will download responses from a qualtrics survey and input them into a Google Sheet
 
 ### Installing
 
