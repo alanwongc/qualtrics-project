@@ -14,11 +14,16 @@ import sys
 import re
 import config
 
+#Python API to manipulate Google Sheets: https://gspread.readthedocs.io/
+import gspread 
+gc = gspread.service_account(filename='credentials.json')
+sh = gc.open("SV_6ES6BtNDjQ3UMJf")
+worksheet = sh.sheet1
+#print(worksheet.row_values(1))
+
 # Set environment variables.
 os.environ['APIKEY'] = config.api_key
 os.environ['DATACENTER'] = config.datacenter
-
-
 
 def exportSurvey(apiToken,surveyId, dataCenter, fileFormat):
 
@@ -40,7 +45,8 @@ def exportSurvey(apiToken,surveyId, dataCenter, fileFormat):
     downloadRequestPayload = '{"format":"' + fileFormat + '"}'
     downloadRequestResponse = requests.request("POST", downloadRequestUrl, data=downloadRequestPayload, headers=headers)
     progressId = downloadRequestResponse.json()["result"]["progressId"]
-    print(downloadRequestResponse.text)
+    #print(downloadRequestResponse.text)
+
 
     # Step 2: Checking on Data Export Progress and waiting until export is ready
     while progressStatus != "complete" and progressStatus != "failed":
@@ -51,15 +57,18 @@ def exportSurvey(apiToken,surveyId, dataCenter, fileFormat):
         print("Download is " + str(requestCheckProgress) + " complete")
         progressStatus = requestCheckResponse.json()["result"]["status"]
 
+
     #step 2.1: Check for error
     if progressStatus is "failed":
         raise Exception("export failed")
 
     fileId = requestCheckResponse.json()["result"]["fileId"]
 
+
     # Step 3: Downloading file
     requestDownloadUrl = baseUrl + fileId + '/file'
     requestDownload = requests.request("GET", requestDownloadUrl, headers=headers, stream=True)
+
 
     # Step 4: Unzipping the file
     zipfile.ZipFile(io.BytesIO(requestDownload.content)).extractall("MyQualtricsDownload")

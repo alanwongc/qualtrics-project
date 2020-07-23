@@ -3,3 +3,4 @@
 # source https://medium.com/knerd/best-practices-for-python-dependency-management-cc8d1913db82
 
 requests
+gspread

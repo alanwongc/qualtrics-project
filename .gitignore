@@ -1,11 +1,16 @@
-# these are the files I have excluded from my commits
+# These are the files I have excluded from my commits
 
 # Ignore MyQualtricsDownload folder
 MyQualtricsDownload
 
-$ Ignore configuration file
+# Ignore configuration file
 config.py
 
 # Ignore compiled files
 config.pyc
+__pycache__
+
+# Ignore gspread credentials file
+credentials.json
+
 
