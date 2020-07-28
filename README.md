@@ -19,5 +19,11 @@ python start.py
 * [Qualtrics API](https://api.qualtrics.com/)
 * [gspread](https://gspread.readthedocs.io/en/latest/)
 
+### Current Limitations
+
+*Need to allow user to select sheet and survey 
+*Gspread clears all other sheets from the spreadsheet when script is run. If we want to perform manipulation on the data, it would have to be from a separate spreadsheet. Useful: https://support.google.com/docs/answer/3093340
+
 ### Acknowlegments
-https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+*https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+*https://medium.com/knerd/best-practices-for-python-dependency-management-cc8d1913db82

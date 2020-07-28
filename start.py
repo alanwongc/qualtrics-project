@@ -17,15 +17,10 @@ import config
 #Python API to manipulate Google Sheets: https://gspread.readthedocs.io/
 import gspread 
 
-gc = gspread.service_account(filename='credentials.json')
+gclient = gspread.service_account(filename='credentials.json')
 
 #specify name of the Google Sheet
-sh = gc.open("SV_6ES6BtNDjQ3UMJf")
-
-#specify which sheet will be used
-worksheet = sh.sheet1
-
-#print(worksheet.row_values(1))
+sheet = gclient.open("SV_6ES6BtNDjQ3UMJf")
 
 # Set Qualtrics API environment variables
 os.environ['APIKEY'] = config.api_key
@@ -83,7 +78,12 @@ def exportSurvey(apiToken,surveyId, dataCenter, fileFormat):
     # Step 5: Upload to Google Sheet
 
     # retrieve name of downloaded results file saved to MyQualtricsDownload
-    print(zipfile.ZipFile(io.BytesIO(requestDownload.content)).namelist())
+    fn = (zipfile.ZipFile(io.BytesIO(requestDownload.content)).namelist()[0])
+
+    # read content and pass to gspread import_csv API
+    with open(f'MyQualtricsDownload/{fn}', 'r') as f:
+        content = f.read()
+        gclient.import_csv(sheet.id, content)
 
 
 def main():
