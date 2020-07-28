@@ -19,8 +19,8 @@ import gspread
 
 gclient = gspread.service_account(filename='credentials.json')
 
-#specify name of the Google Sheet
-sheet = gclient.open("SV_6ES6BtNDjQ3UMJf")
+#specify name of the Google Sheet that has been provided access
+sheet = gclient.open("survey-response-dashboard")
 
 # Set Qualtrics API environment variables
 os.environ['APIKEY'] = config.api_key
@@ -88,6 +88,7 @@ def exportSurvey(apiToken,surveyId, dataCenter, fileFormat):
 
 def main():
     
+    print()
     try:
       apiToken = os.environ['APIKEY']
       dataCenter = os.environ['DATACENTER']
