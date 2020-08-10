@@ -1,8 +1,8 @@
 # Alan Wong
 
-# updated 7/14/20
+# updated 8/9/20
 
-# Using the API solution guide found at 
+# Makes use of the Qualtrics API solution guide found at 
 # https://api.qualtrics.com/guides/docs/Guides/Common%20Tasks/getting-survey-responses-via-the-new-export-apis.md
 # to download responses for a specified survey into a zip file
 
@@ -14,15 +14,15 @@ import sys
 import re
 import config
 
-#Python API to manipulate Google Sheets: https://gspread.readthedocs.io/
+# Set up and use gspread to manipulate Google Sheets: https://gspread.readthedocs.io/
 import gspread 
 
 gclient = gspread.service_account(filename='credentials.json')
 
-#specify name of the Google Sheet that has been provided access
+# Specify name of the Google Sheet that has been provisioned for gspread
 sheet = gclient.open("survey-response-dashboard")
 
-# Set Qualtrics API environment variables
+# Look for the Qualtrics API environment variables stored in config.py
 os.environ['APIKEY'] = config.api_key
 os.environ['DATACENTER'] = config.datacenter
 
@@ -75,15 +75,17 @@ def exportSurvey(apiToken,surveyId, dataCenter, fileFormat):
     zipfile.ZipFile(io.BytesIO(requestDownload.content)).extractall("MyQualtricsDownload")
     print('Complete')
 
+
     # Step 5: Upload to Google Sheet
 
-    # retrieve name of downloaded results file saved to MyQualtricsDownload
+    # store the name of the just downloaded file from MyQualtricsDownload
     fn = (zipfile.ZipFile(io.BytesIO(requestDownload.content)).namelist()[0])
 
-    # read content and pass to gspread import_csv API
+    # handle, read, and pass file to the gspread import_csv function
     with open(f'MyQualtricsDownload/{fn}', 'r') as f:
         content = f.read()
         gclient.import_csv(sheet.id, content)
+        print(f'{fn} posted to https://docs.google.com/spreadsheets/d/1FnzyRnJBWo0j_eyh3ia0wX11Fbhl-NBAJMu01Y3Z3tc')
 
 
 def main():
@@ -97,13 +99,11 @@ def main():
       sys.exit(2)
 
     try:
-        # Take in survey ID and file format as command line arguments
-        #surveyId=sys.argv[1]
-        #fileFormat=sys.argv[2]
-
-        # Hard code the survey ID and file format instead for easier testing
-        surveyId = 'SV_6ES6BtNDjQ3UMJf'
         fileFormat = 'csv'
+
+        # specify the survey ID in the config file
+        surveyId = config.survey_id
+        
 
     except IndexError:
         print ("usage: surveyId fileFormat")
