@@ -1,6 +1,6 @@
 # qualtrics-project
 
-This Python command line tool will download responses from a specified qualtrics survey and input them into a Google Sheet. I chose python for this project as it is a modern and versatile language with many useful libraries written for it.
+This Python command line tool will download responses from a specified Qualtrics survey and input them into a Google Sheet. I chose Python for this project as it is a modern and versatile language with many useful libraries written for it.
 
 ### Usage
 
@@ -31,5 +31,6 @@ python start.py
 * Tested only with Python 3
 
 ### Acknowlegments
+* https://api.qualtrics.com/guides/docs/Guides/Common%20Tasks/getting-survey-responses-via-the-new-export-apis.md
 * https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
 * https://medium.com/knerd/best-practices-for-python-dependency-management-cc8d1913db82
