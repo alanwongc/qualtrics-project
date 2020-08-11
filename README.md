@@ -14,7 +14,8 @@ api_key = 'YOUR_API_KEY_HERE'
 datacenter = 'YOUR_DATACENTER_HERE' 
 survey_id = 'YOUR_SURVEY_ID_HERE'
 ```
-3. Run the following to trigger an update to the survey dashboard: https://docs.google.com/spreadsheets/d/1FnzyRnJBWo0j_eyh3ia0wX11Fbhl-NBAJMu01Y3Z3tc (you may need to request access)
+3. Obtain and include in the directory the Google Service Account key for gspread, credentials.json
+4. Run the following to trigger an update to the survey dashboard: https://docs.google.com/spreadsheets/d/1FnzyRnJBWo0j_eyh3ia0wX11Fbhl-NBAJMu01Y3Z3tc (you may need to request access)
 ```
 python start.py 
 ```
